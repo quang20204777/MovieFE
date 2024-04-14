@@ -1,0 +1,23 @@
+.image-card {
+    margin: 20px;
+    position: relative;
+}
+
+.card-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-card:hover .card-content {
+    opacity: 1;
+}
+
+.image-card:hover img {
+    filter: brightness(50%);
+    transition: 0.5s
+}
