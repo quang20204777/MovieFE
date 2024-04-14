@@ -10,12 +10,16 @@ import {
   Input,
   Divider,
   Button,
+  Dropdown,
 } from "antd";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { STATUS_CODE } from "../../../utils/constant/statusCode.js";
 import { UserOutlined } from "@ant-design/icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
+import LogoImage from "../../../assets/galaxy-logo-mobile.074abeac.png";
+import DropdownItem from "./DropdownItem.jsx";
+import DropdownImage from "./DropdownImage.jsx";
 
 const LayoutCinema = () => {
   const { Header, Content, Footer } = Layout;
@@ -74,35 +78,31 @@ const LayoutCinema = () => {
         style={{
           width: "100%",
           height: "85px",
-          position: "sticky",
           top: "0",
           zIndex: "1",
           padding: "0",
         }}
       >
-        <div className="logo"></div>
-        <Menu theme="light" mode="horizontal" defaultSelectedKeys={["2"]}>
+        <Menu theme="light" mode="horizontal">
           <Row
             justify="center"
             align="middle"
             style={{ width: "100%", height: "85px" }}
           >
-            <Col span={5}>
-              <p
+            <Col span={4}>
+              <img
+                src={LogoImage}
+                alt="logo"
                 style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  textAlign: "center",
-                  margin: "0",
+                  width: "140px",
+                  height: "60px",
                 }}
-              >
-                Cinema
-              </p>
+              />
             </Col>
             <Col span={14}>
               <Row justify="center" align="middle">
                 <Col
-                  span={8}
+                  span={6}
                   style={{ display: "flex", justifyContent: "center" }}
                 >
                   <img
@@ -111,57 +111,82 @@ const LayoutCinema = () => {
                     style={{ height: "36px", width: "50%" }}
                   />
                 </Col>
-                <Col span={4} style={{ height: "85x" }}>
-                  <p style={{ fontSize: ".875rem", margin: "0" }}>
-                    <Menu>
-                      <NavLink
-                        className="nav-link"
-                        to="/homepage"
-                        style={{ color: "black" }}
-                      >
-                        Trang chủ
-                      </NavLink>
-                    </Menu>
-                  </p>
-                </Col>
-                <Col span={4} style={{ height: "85x" }}>
-                  <p style={{ fontSize: ".875rem", margin: "0" }}>
-                    <Menu>Phim</Menu>
-                  </p>
-                </Col>
-                <Col span={4} style={{ height: "85x" }}>
-                  <p style={{ fontSize: ".875rem", margin: "0" }}>
-                    <Menu>Góc điện ảnh</Menu>
-                  </p>
-                </Col>
-                <Col span={4} style={{ height: "85x" }}>
-                  <p style={{ fontSize: ".875rem", margin: "0" }}>
-                    <Menu style={{ borderRight: "1px solid white" }}>Rạp</Menu>
-                  </p>
-                </Col>
+                <Menu.Item>
+                  <DropdownImage
+                    title="Phim"
+                    dropdownItems={[
+                      {
+                        name: "Phim đang chiếu",
+                        path: "/phim-dang-chieu",
+                        movies: [{ movie: 1 }, { movie: 2 }, { movie: 3 }],
+                      },
+                      {
+                        name: "Phim sắp chiếu",
+                        path: "/phim-sap-chieu",
+                        movies: [{ movie: 1 }, { movie: 2 }, { movie: 3 }],
+                      },
+                      {
+                        name: "Phim IMAX",
+                        path: "/phim-imax",
+                        movies: [{ movie: 1 }, { movie: 2 }, { movie: 3 }],
+                      },
+                    ]}
+                  />
+                </Menu.Item>
+                <Menu.Item>
+                  <DropdownItem
+                    title="Góc điện ảnh"
+                    dropdownItems={[
+                      { name: "Thể loại phim", path: "/dien-anh" },
+                      { name: "Diễn viên", path: "/dien-anh" },
+                      { name: "Đạo diễn", path: "/dien-anh" },
+                      { name: "Bình luận phim", path: "/dien-anh" },
+                      { name: "Blog điện ảnh", path: "/dien-anh" },
+                    ]}
+                  />
+                </Menu.Item>
+                <Menu.Item>
+                  <DropdownItem
+                    title="Sự kiện"
+                    dropdownItems={[
+                      { name: "Ưu đãi", path: "/dien-anh" },
+                      { name: "Phim hay tháng", path: "/dien-anh" },
+                    ]}
+                  />
+                </Menu.Item>
+                <Menu.Item>
+                  <DropdownItem
+                    title="Rạp/Giá vé"
+                    dropdownItems={[
+                      { name: "Galaxy Nguyễn Du", path: "/dien-anh" },
+                    ]}
+                  />
+                </Menu.Item>
               </Row>
             </Col>
-            <Col span={3}> Username</Col>
-            <Col span={2}>
+            <Col span={4}>
               <Menu.SubMenu
                 theme="light"
-                icon=<UserOutlined
-                  onClick={() => setIsLoginModalOpen(true)}
-                  style={{ fontSize: "25px", marginLeft: "40px" }}
-                />
+                title="Đăng nhập"
+                icon={
+                  <UserOutlined
+                    style={{ fontSize: "25px", marginLeft: "40px" }}
+                  />
+                }
+                onTitleClick={() => setIsLoginModalOpen(true)}
               >
-                {/* <Menu.Item
-                //   style={{
-                //     fontSize: "15px",
-                //     fontWeight: "500",
-                //     color: "#303f9f",
-                //     paddingTop: "5px",
-                //     paddingLeft: "31px",
-                //     boxSizing: "border-box",
-                //   }}
-                // >
-                //   Đăng xuất
-              // </Menu.Item> */}
+                <Menu.Item
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "500",
+                    color: "#303f9f",
+                    paddingTop: "5px",
+                    paddingLeft: "31px",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  Đăng xuất
+                </Menu.Item>
               </Menu.SubMenu>
             </Col>
           </Row>
@@ -181,7 +206,7 @@ const LayoutCinema = () => {
         <Modal
           open={isLoginModalOpen}
           title={
-            <div className="login-icon mb-3 text-center">
+            <div className="login-icon text-center">
               <img
                 src="https://www.galaxycine.vn/_next/static/media/icon-login.fbbf1b2d.svg"
                 alt="logo-icon"
@@ -256,29 +281,26 @@ const LayoutCinema = () => {
                 </div>
               </Form.Item>
               <Form.Item>
-                {/** <div
+                <div
                   className="text-center pt-1 mb-5"
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-               <button
-                  className="btn btn-primary btn-block fa-lg gradient-custom-2"
-                  style={{
-                    width: "100%",
-                    fontSize: "16px",
-                    paddingTop: "12px",
-                    paddingBottom: "12px",
-                    marginBottom: "6px",
-                    border: "none",
-                    color: "white",
-                  }}
-                  htmlType="submit"
-                >
-                  Đăng nhập
-                </button>
-                </div> */}
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
+                  <button
+                    className="btn btn-primary btn-block fa-lg gradient-custom-2"
+                    style={{
+                      width: "100%",
+                      fontSize: "16px",
+                      paddingTop: "12px",
+                      paddingBottom: "12px",
+                      marginBottom: "6px",
+                      border: "none",
+                      color: "white",
+                    }}
+                    htmlType="submit"
+                  >
+                    Đăng nhập
+                  </button>
+                </div>
               </Form.Item>
               <Divider />
               <Form.Item>
