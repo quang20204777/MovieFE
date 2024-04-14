@@ -1,0 +1,3 @@
+export const TOKEN_SUPERADMIN = 'TOKEN_SUPERADMIN'
+
+export const TOKEN_GUEST = 'TOKEN_GUEST'
